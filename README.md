@@ -110,9 +110,9 @@ bash ./run.sh
 | Command Type   | Example Command         | System Response                     |  
 |----------------|-------------------------|-------------------------------------|  
 | Wake Command   | "computer"              | "How can I help you?"               |  
-| Temp/Humid Query| "what's the temperature"| "Current temperature is 25.5°C"     |  
-| Time Query     | "what's the time"       | "The current time is 14:30"         |  
-| Exit Command   | "exit"                  | "Goodbye!" (stops all services)     |  
+| Temp/Humid Query| "Humitidy" or "temperature"| "Current temperature is 25.5°C"     |  
+| Time Query     | "time"      | "The current time is 14:30"         |  
+| Exit Command   | "exit" or "quit"                 | "Goodbye!" (stops all services)     |  
 
 
 ## 5. Code Structure & Module Description  
@@ -182,9 +182,9 @@ Thanks to the following open-source projects and communities:
 ### Roadmap  
 | Version | Timeline | Core Features                          |  
 |---------|----------|----------------------------------------|  
-| v1.1    | Q1 2024  | Support for BME280 sensor (pressure/altitude) |  
-| v1.2    | Q2 2024  | Migrate from JSON to SQLite database    |  
-| v1.3    | Q3 2024  | Develop mobile apps (Android/iOS)      |  
+| v1.1    | Q1 2025  | Support for BME280 sensor (pressure/altitude) |  
+| v1.2    | Q2 2025  | Migrate from JSON to SQLite database    |  
+| v1.3    | Q3 2025  | Develop mobile apps (Android/iOS)      |  
 
 ### Maintenance  
 - Regular dependency updates and security patches (monthly).  
