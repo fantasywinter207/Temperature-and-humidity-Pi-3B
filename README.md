@@ -97,33 +97,13 @@ The OLED display connects via I2C; enable I2C in `raspi-config` before use.
 ### 2. Software Installation  
 #### Step 1: Clone Repository  
 ```bash  
-git clone https://github.com/your-username/raspberrypi-env-monitor.git  
-cd raspberrypi-env-monitor  
+git clone https://github.com/fantasywinter207/Temperature-and-humidity-Pi-3B.git  
+cd Temperature-and-humidity-Pi-3B 
 ```  
 
-#### Step 2: Set Up Python Environment  
+### 2. System Startup Commands  
 ```bash  
-# Create virtual environment  
-python3 -m venv dht11_env  
-# Activate (Linux/macOS)  
-source dht11_env/bin/activate  
-# Install dependencies  
-pip install flask vosk pyttsx3 requests  
-```  
-
-#### Step 3: Compile C++ Drivers  
-```bash  
-g++ -o main main.cpp dht11.cpp oled.cpp -lgpiod -std=c++11  
-```  
-
-### 3. System Startup Commands  
-```bash  
-# 1. Start web server (background)  
-python3 server.py &  
-# 2. Launch voice assistant (background)  
-python3 speak.py &  
-# 3. Run main program (foreground, Ctrl+C to stop)  
-./main  
+bash ./run.sh 
 ```  
 
 ### 4. Voice Command List  
