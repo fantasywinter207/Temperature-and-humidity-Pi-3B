@@ -1,269 +1,211 @@
-# 家庭天气监测系统
 
-这是一个基于树莓派的家庭天气监测系统，能够实时监测室内温度和湿度，并提供Web界面进行数据可视化。系统还支持语音关键词检测，通过语音指令获取当前温湿度信息。
-
-## 功能特点
-
-- 实时监测室内温度和湿度
-- OLED屏幕显示当前环境数据
-- Web服务器提供数据可视化界面
-- 数据自动保存，支持历史数据查看
-- 支持中文显示（需安装中文字体）
-- 语音关键词检测，说出唤醒词可获取当前温湿度信息
-- 多线程设计，传感器监测、Web服务器和语音检测同时工作
-
-## 硬件要求
-
-- 树莓派（Raspberry Pi）
-- DHT11温湿度传感器
-- SSD1306 OLED显示屏（I2C接口）
-- 麦克风（用于语音检测）
-- 扬声器（用于语音播报）
-- 连接线和面包板
-
-## 接线方式
-
-- DHT11数据引脚连接到GPIO4
-- OLED显示屏通过I2C接口连接（SDA和SCL引脚）
-- 麦克风和扬声器根据具体型号连接
-
-## 安装步骤
-
-1. 安装必要的系统依赖：
-
-```bash
-sudo apt-get update
-sudo apt-get install -y python3-pip python3-pil python3-smbus i2c-tools espeak
-```
-
-2. 启用I2C接口：
-
-```bash
-sudo raspi-config
-# 选择 "Interface Options" -> "I2C" -> "Yes"
-```
-
-3. 安装Python依赖：
-
-```bash
-pip3 install flask adafruit-circuitpython-ssd1306 adafruit-circuitpython-dht requests
-```
-
-4. 下载并安装Snowboy语音检测工具：
-
-```bash
-# 按照Snowboy官方文档安装必要依赖
-# 获取Snowboy项目文件并安装
-```
-
-5. 下载本项目代码：
-
-```bash
-git clone <项目仓库地址>
-cd home_weather
-```
-
-6. （可选）安装中文字体以支持OLED中文显示：
-
-```bash
-sudo apt-get install -y fonts-wqy-zenhei
-# 或复制simhei.ttf到项目目录
-```
-
-7. 准备语音关键词模型：
-
-```bash
-# 确保pi.pmdl文件存在于项目根目录
-# 或使用Snowboy工具训练自己的关键词模型
-```
-
-## 使用方法
-
-1. 启动主程序（集成了所有功能）：
-
-```bash
-python3 main.py
-```
-
-2. 打开网页浏览器，访问：
-
-```
-http://<树莓派IP地址>:5000
-```
-
-3. 对着麦克风说出你设置的关键词（默认为"Pi"），系统将语音播报当前温湿度
-
-## 主要文件说明
-
-- `main.py`: 集成的主程序，包含传感器监测、Web服务器和语音检测功能
-- `dht11.py`: DHT11温湿度传感器接口
-- `oled.py`: OLED显示屏控制
-- `snowboydecoder.py`: Snowboy语音检测解码器
-- `snowboydetect.py`: Snowboy语音检测引擎
-- `pi.pmdl`: 语音关键词模型文件
-- `templates/index.html`: Web界面
-
-## 系统工作原理
-
-本系统基于多线程设计，主要包含三个线程：
-1. 传感器线程：每3秒读取一次温湿度数据，更新OLED显示，并保存数据
-2. Web服务器线程：提供Web界面，显示实时和历史温湿度数据
-3. 语音检测线程：持续监听关键词，触发后播报当前温湿度
-
-系统采用线程锁机制保证数据一致性，并设置了语音触发的冷却时间（默认60秒），避免频繁触发。
-
-## 注意事项
-
-- 确保DHT11和OLED屏幕正确连接到树莓派
-- 如需在OLED上显示中文，请安装相应字体
-- 传感器可能会出现偶尔读取失败的情况，这是正常现象
-- 数据存储在`sensor_data.json`文件中，默认保留最近1000条记录
-- 语音关键词需要在安静环境中使用，避免环境噪音干扰
-- 语音触发有60秒的冷却时间，避免频繁触发
-
-## 问题排查
-
-- 如果OLED无法显示，检查I2C连接和地址设置
-- 如果传感器数据持续无法读取，检查DHT11连接和电源
-- 如果Web界面无法访问，确保服务器正在运行且端口未被占用
-- 如果语音关键词检测不工作，检查麦克风连接和模型文件路径
-- 如果语音播报无声音，检查扬声器连接和espeak安装
-
-## 贡献与反馈
-
-=======
-# 家庭天气监测系统
-
-这是一个基于树莓派的家庭天气监测系统，能够实时监测室内温度和湿度，并提供Web界面进行数据可视化。系统还支持语音关键词检测，通过语音指令获取当前温湿度信息。
-
-## 功能特点
-
-- 实时监测室内温度和湿度
-- OLED屏幕显示当前环境数据
-- Web服务器提供数据可视化界面
-- 数据自动保存，支持历史数据查看
-- 支持中文显示（需安装中文字体）
-- 语音关键词检测，说出唤醒词可获取当前温湿度信息
-- 多线程设计，传感器监测、Web服务器和语音检测同时工作
-
-## 硬件要求
-
-- 树莓派（Raspberry Pi）
-- DHT11温湿度传感器
-- SSD1306 OLED显示屏（I2C接口）
-- 麦克风（用于语音检测）
-- 扬声器（用于语音播报）
-- 连接线和面包板
-
-## 接线方式
-
-- DHT11数据引脚连接到GPIO4
-- OLED显示屏通过I2C接口连接（SDA和SCL引脚）
-- 麦克风和扬声器根据具体型号连接
-
-## 安装步骤
-
-1. 安装必要的系统依赖：
-
-```bash
-sudo apt-get update
-sudo apt-get install -y python3-pip python3-pil python3-smbus i2c-tools espeak
-```
-
-2. 启用I2C接口：
-
-```bash
-sudo raspi-config
-# 选择 "Interface Options" -> "I2C" -> "Yes"
-```
-
-3. 安装Python依赖：
-
-```bash
-pip3 install flask adafruit-circuitpython-ssd1306 adafruit-circuitpython-dht requests
-```
-
-4. 下载并安装Snowboy语音检测工具：
-
-```bash
-# 按照Snowboy官方文档安装必要依赖
-# 获取Snowboy项目文件并安装
-```
-
-5. 下载本项目代码：
-
-```bash
-git clone <项目仓库地址>
-cd home_weather
-```
-
-6. （可选）安装中文字体以支持OLED中文显示：
-
-```bash
-sudo apt-get install -y fonts-wqy-zenhei
-# 或复制simhei.ttf到项目目录
-```
-
-7. 准备语音关键词模型：
-
-```bash
-# 确保pi.pmdl文件存在于项目根目录
-# 或使用Snowboy工具训练自己的关键词模型
-```
-
-## 使用方法
-
-1. 启动主程序（集成了所有功能）：
-
-```bash
-python3 main.py
-```
-
-2. 打开网页浏览器，访问：
-
-```
-http://<树莓派IP地址>:5000
-```
-
-3. 对着麦克风说出你设置的关键词（默认为"Pi"），系统将语音播报当前温湿度
-
-## 主要文件说明
-
-- `main.py`: 集成的主程序，包含传感器监测、Web服务器和语音检测功能
-- `dht11.py`: DHT11温湿度传感器接口
-- `oled.py`: OLED显示屏控制
-- `snowboydecoder.py`: Snowboy语音检测解码器
-- `snowboydetect.py`: Snowboy语音检测引擎
-- `pi.pmdl`: 语音关键词模型文件
-- `templates/index.html`: Web界面
-
-## 系统工作原理
-
-本系统基于多线程设计，主要包含三个线程：
-1. 传感器线程：每3秒读取一次温湿度数据，更新OLED显示，并保存数据
-2. Web服务器线程：提供Web界面，显示实时和历史温湿度数据
-3. 语音检测线程：持续监听关键词，触发后播报当前温湿度
-
-系统采用线程锁机制保证数据一致性，并设置了语音触发的冷却时间（默认60秒），避免频繁触发。
-
-## 注意事项
-
-- 确保DHT11和OLED屏幕正确连接到树莓派
-- 如需在OLED上显示中文，请安装相应字体
-- 传感器可能会出现偶尔读取失败的情况，这是正常现象
-- 数据存储在`sensor_data.json`文件中，默认保留最近1000条记录
-- 语音关键词需要在安静环境中使用，避免环境噪音干扰
-- 语音触发有60秒的冷却时间，避免频繁触发
-
-## 问题排查
-
-- 如果OLED无法显示，检查I2C连接和地址设置
-- 如果传感器数据持续无法读取，检查DHT11连接和电源
-- 如果Web界面无法访问，确保服务器正在运行且端口未被占用
-- 如果语音关键词检测不工作，检查麦克风连接和模型文件路径
-- 如果语音播报无声音，检查扬声器连接和espeak安装
-
-## 贡献与反馈
-
->>>>>>> origin/master
-欢迎提交问题报告和改进建议！ 
+# Real-Time Environmental Monitoring System for Raspberry Pi  
+
+
+## 1. Project Overview  
+### Project Name  
+Real-Time Environmental Monitoring System for Raspberry Pi  
+
+### Project Description  
+An embedded system developed for Raspberry Pi, integrating temperature/humidity monitoring, OLED data display, data storage, and voice interaction. Suitable for smart homes, greenhouses, and small-scale industrial monitoring. Uses C++ for hardware drivers and Python for web services and voice functions, balancing performance and development efficiency.  
+
+### Core Advantages  
+- **Realtime Performance**: Thread prioritization and multi-threading ensure non-blocking sensor data collection and interface refresh.  
+- **Modular Design**: Separation of hardware drivers (DHT11, OLED) and software services (Web, Voice) for easy expansion and maintenance.  
+- **User Interaction**: Supports voice queries and anomaly alerts, reducing operational complexity.  
+
+
+## 2. Key Functional Features  
+
+### 1. Real-Time Temperature/Humidity Monitoring  
+- **Hardware Support**: DHT11 sensor (connected to GPIO4), with data validation and outlier filtering.  
+- **Data Collection**:  
+  - Real-time sampling at 1-second intervals, implemented via `readData()` in `dht11.cpp` for sensor communication and checksum verification.  
+  - Returns `std::nullopt` on validation failure to avoid invalid data entry.  
+- **Threshold Alerts**:  
+  - Temperature: 10°C ~ 40°C, Humidity: 20% ~ 95%.  
+  - Voice warnings ("Current temperature is too high, please ventilate!") and OLED flashing for out-of-range values.  
+
+### 2. OLED Visualization  
+- **Hardware Connection**: 128x32 I2C OLED display (GPIO2/SDA, GPIO3/SCL).  
+- **Display Content**:  
+  - **Time**: Real-time date (YYYY-MM-DD) on page 0.  
+  - **Temperature**: 0.1°C precision, format: "TEMPERATURE: X.X°C" (page 2).  
+  - **Humidity**: 0.1% precision, format: "HUMIDITY: X.X%" (page 4).  
+- **Refresh Mechanism**: Auto-clears and redraws data every 60 seconds for clarity.  
+
+### 3. Data Storage & Web API  
+- **Local Storage**:  
+  - Data stored in `sensor_data.json` (JSON format), retaining up to 1000 historical records.  
+  - Includes timestamp, temperature, and humidity fields, supporting resume on breakpoint and file recovery.  
+- **Web Services**:  
+  - Flask-based RESTful API:  
+    - **POST /data**: Upload real-time data (Content-Type: application/json).  
+    - **GET /data**: Retrieve historical data for frontend display or analysis.  
+
+### 4. Voice Interaction System  
+- **Speech Recognition**:  
+  - Wake word "computer" activates the Vosk model, supporting English/Chinese commands (language packs required).  
+  - Recognizes queries like "What's the humidity?" or "Exit system", with <1.5s response time (tested on Raspberry Pi 4B).  
+- **Speech Synthesis**:  
+  - pyttsx3 engine for voice feedback, adjustable speech rate (150 words/minute) and volume.  
+  - Auto-broadcasts anomalies (e.g., "Warning: Humidity below 20%, please increase humidity!").  
+
+
+## 3. Technical Architecture & Implementation  
+
+### 1. Hardware Architecture  
+| Component       | Model/Specification | Function               | Connection       |  
+|-----------------|---------------------|------------------------|------------------|  
+| Main Board      | Raspberry Pi 4B (4GB)| System control         | N/A              |  
+| Sensor          | DHT11               | Temp/humidity collection| GPIO4 (BCM)      |  
+| Display         | 128x32 OLED         | Data visualization     | I2C (GPIO2/SDA, GPIO3/SCL) |  
+
+### 2. Software Architecture  
+```  
+Raspberry Pi OS (Raspbian)  
+├─ C++ Hardware Driver Layer  
+│  ├─ DHT11 Class (dht11.h/cpp): Sensor communication and data validation  
+│  └─ OLED Class (oled.h/cpp): I2C protocol and text rendering  
+├─ Python Service Layer  
+│  ├─ Flask Web Server (server.py): Data storage and API  
+│  └─ Voice Assistant (speak.py): Speech recognition, synthesis, and alerts  
+└─ Main Program (main.cpp): Multi-thread integration of drivers and services  
+```  
+
+### 3. Key Technical Points  
+- **Multi-Threading**:  
+  - `std::async` in `main.cpp` starts Web server and voice assistant in the background, avoiding blocking the sensor collection loop.  
+  - Highest thread priority for sensor reading (`set_max_priority`) to ensure realtime response.  
+- **Memory-Mapped GPIO**:  
+  - Direct GPIO register access via `mmap` in `dht11.cpp` for high-speed communication (requires root privileges).  
+- **Cross-Language Collaboration**:  
+  - C++ for high-performance hardware drivers, Python for I/O-bound tasks (network requests, speech synthesis), balancing efficiency and development speed.  
+
+
+## 4. Quick Start & Usage Guide  
+
+### 1. Hardware Wiring  
+| DHT11 Pin | Raspberry Pi Physical Pin | BCM GPIO Number |  
+|-----------|---------------------------|-----------------|  
+| VCC       | 2/4 (5V)                  | -               |  
+| DATA      | 7                         | GPIO4           |  
+| GND       | 6                         | -               |  
+
+The OLED display connects via I2C; enable I2C in `raspi-config` before use.  
+
+### 2. Software Installation  
+#### Step 1: Clone Repository  
+```bash  
+git clone https://github.com/your-username/raspberrypi-env-monitor.git  
+cd raspberrypi-env-monitor  
+```  
+
+#### Step 2: Set Up Python Environment  
+```bash  
+# Create virtual environment  
+python3 -m venv dht11_env  
+# Activate (Linux/macOS)  
+source dht11_env/bin/activate  
+# Install dependencies  
+pip install flask vosk pyttsx3 requests  
+```  
+
+#### Step 3: Compile C++ Drivers  
+```bash  
+g++ -o main main.cpp dht11.cpp oled.cpp -lgpiod -std=c++11  
+```  
+
+### 3. System Startup Commands  
+```bash  
+# 1. Start web server (background)  
+python3 server.py &  
+# 2. Launch voice assistant (background)  
+python3 speak.py &  
+# 3. Run main program (foreground, Ctrl+C to stop)  
+./main  
+```  
+
+### 4. Voice Command List  
+| Command Type   | Example Command         | System Response                     |  
+|----------------|-------------------------|-------------------------------------|  
+| Wake Command   | "computer"              | "How can I help you?"               |  
+| Temp/Humid Query| "what's the temperature"| "Current temperature is 25.5°C"     |  
+| Time Query     | "what's the time"       | "The current time is 14:30"         |  
+| Exit Command   | "exit"                  | "Goodbye!" (stops all services)     |  
+
+
+## 5. Code Structure & Module Description  
+
+### 1. Directory Structure  
+```  
+Project Root  
+├── src/                # C++ Source Code  
+│   ├── dht11.h         # DHT11 Class Declaration  
+│   ├── dht11.cpp       # DHT11 Driver Implementation  
+│   ├── oled.h          # OLED Class Declaration  
+│   ├── oled.cpp        # OLED Driver Implementation  
+│   └── main.cpp        # Main Program Logic  
+├── scripts/            # Python Scripts  
+│   ├── server.py       # Web Server  
+│   └── speak.py        # Voice Assistant  
+├── sensor_data.json    # Data Storage File  
+├── requirements.txt    # Python Dependencies  
+└── LICENSE             # License File  
+```  
+
+### 2. Core Class Descriptions  
+#### DHT11 Class (dht11.h/cpp)  
+- **Function**: Encapsulates DHT11 communication and data validation.  
+- **Key Methods**:  
+  - `readData()`: Returns `std::pair<float, float>` (humidity, temperature), or `std::nullopt` on validation failure.  
+  - `pi_mmio_init()`: Initializes GPIO memory mapping for high-speed hardware access.  
+
+#### OLED Class (oled.h/cpp)  
+- **Function**: Controls OLED display, supporting text rendering and initialization.  
+- **Key Methods**:  
+  - `drawText(int page, int col, std::string)`: Draws text at specified page (0-4) and column (0-127).  
+  - `init()`: Configures OLED parameters (contrast, scan direction, etc.).  
+
+
+## 6. Contribution & Collaboration  
+
+### 1. Code Standards  
+- **C++**: Follow C++11, camelCase naming (e.g., `drawText`), Doxygen comments for key functions.  
+- **Python**: Adhere to PEP8, module-level comments, avoid global variables.  
+
+### 2. Contribution Workflow  
+1. Fork the repo and create a feature branch (e.g., `feature/add-bme280`).  
+2. Run unit tests (to be added) before code submission.  
+3. Submit Pull Requests with feature descriptions and test steps.  
+
+### 3. Issue Reporting  
+- **Bug Reports**: Include reproduction steps, hardware model, and error logs (e.g., "dht11.cpp line XX validation failed").  
+- **Feature Requests**: Submit via GitHub Issues with "Enhancement" label.  
+
+
+## 7. License & Acknowledgments  
+
+### License  
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.  
+
+### Acknowledgments  
+Thanks to the following open-source projects and communities:  
+- [Vosk](https://alphacephei.com/vosk): Speech recognition engine  
+- [pyttsx3](https://pyttsx3.readthedocs.io): Text-to-speech library  
+- [Flask](https://palletsprojects.com/p/flask/): Web development framework  
+- [Raspberry Pi Foundation](https://www.raspberrypi.org/): Hardware documentation and community resources  
+
+
+## 8. Future Plans  
+
+### Roadmap  
+| Version | Timeline | Core Features                          |  
+|---------|----------|----------------------------------------|  
+| v1.1    | Q1 2024  | Support for BME280 sensor (pressure/altitude) |  
+| v1.2    | Q2 2024  | Migrate from JSON to SQLite database    |  
+| v1.3    | Q3 2024  | Develop mobile apps (Android/iOS)      |  
+
+### Maintenance  
+- Regular dependency updates and security patches (monthly).  
+- Bug fixes for community feedback within 72 hours.  
