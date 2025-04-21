@@ -6,7 +6,7 @@
 
 This embedded system, designed specifically for Raspberry Pi, integrates real - time temperature and humidity monitoring, OLED data display, data storage, and voice interaction. Ideal for smart homes, greenhouses, and small - scale industrial monitoring.
 
-[Click here to watch our project in action!](https://www.example.com/video)
+[Click here to watch our project in action!](https://youtu.be/6Cy_jflKvcY?si=Tw9HrwRCOWop9JV1)
 
 ## 1. Project Overview
 ### Project Name
@@ -39,7 +39,7 @@ An embedded system developed for Raspberry Pi, integrating temperature/humidity 
   - **Humidity**: 0.1% precision, format: "HUMIDITY: X.X%" (page 4).  
 - **Refresh Mechanism**: Auto-clears and redraws data every 60 seconds for clarity.
 
-![OLED Display Screenshot](https://github.com/fantasywinter207/Temperature-and-humidity-Pi-3B/blob/main/images/1.jpg)
+![OLED Display Screenshot](images/5.jpg)
 
 ### 3. Data Storage & Web API  
 - **Local Storage**:  
@@ -50,7 +50,7 @@ An embedded system developed for Raspberry Pi, integrating temperature/humidity 
     - **POST /data**: Upload real-time data (Content-Type: application/json).  
     - **GET /data**: Retrieve historical data for frontend display or analysis.
 
-![Web Interface Screenshot](images/2.jpg)
+![Web Interface Screenshot](images/6.png)
 
 ### 4. Voice Interaction System  
 - **Speech Recognition**:  
@@ -69,7 +69,7 @@ An embedded system developed for Raspberry Pi, integrating temperature/humidity 
 | Sensor          | DHT11               | Temp/humidity collection| GPIO4 (BCM)      |  
 | Display         | 128x32 OLED         | Data visualization     | I2C (GPIO2/SDA, GPIO3/SCL) |  
 
-![Hardware Connection Diagram](diagrams/hardware_connection.png)
+![Hardware Connection Diagram](images/7.png)
 
 ### 2. Software Architecture  
 ```  
@@ -79,7 +79,7 @@ Raspberry Pi OS (Raspbian)
 │  └─ OLED Class (oled.h/cpp): I2C protocol and text rendering  
 ├─ Python Service Layer  
 │  ├─ Flask Web Server (server.py): Data storage and API  
-│  └─ Voice Assistant (removed): No longer part of the codebase  
+│  └─ Web(index.html/web): Web and voice modules
 └─ Main Program (main.cpp): Multi-thread integration of drivers and services  
 ```  
 
@@ -103,8 +103,8 @@ Raspberry Pi OS (Raspbian)
 
 The OLED display connects via I2C; enable I2C in `raspi-config` before use.
 
-![DHT11 Wiring Diagram](diagrams/dht11_wiring.png)
-![OLED Wiring Diagram](diagrams/oled_wiring.png)
+![DHT11 Wiring Diagram](images/3.jpg)
+![OLED Wiring Diagram](images/1.jpg)
 
 ### 2. Software Installation  
 #### Step 1: Clone Repository  
