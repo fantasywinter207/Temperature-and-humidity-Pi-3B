@@ -2,9 +2,11 @@
 
 **Revolutionize your environmental monitoring with our cutting - edge Raspberry Pi system!**
 
-This embedded system, designed specifically for Raspberry Pi, integrates real - time temperature and humidity monitoring, OLED data display, data storage, and voice interaction. Ideal for smart homes, greenhouses, and small - scale industrial monitoring.
+An embedded system developed for Raspberry Pi, integrating temperature/humidity monitoring, OLED data display, data storage, and voice interaction. Suitable for smart homes, greenhouses, and small-scale industrial monitoring. Uses C++ for hardware drivers and Python for web services and voice functions, balancing performance and development efficiency.
 
-[Click here to watch our project in action!](https://youtu.be/6Cy_jflKvcY?si=Tw9HrwRCOWop9JV1)
+### Project Promotion
+We have also uploaded a demonstration video of this project on YouTube, which shows the real - time operation of the environmental monitoring system, including data display on the OLED screen, voice interaction functions, and the web interface for data visualization. You can watch the video by clicking [here](https://youtu.be/6Cy_jflKvcY?si=Tw9HrwRCOWop9JV1).
+
 
 ## 1. Project Overview
 ### Project Name
@@ -52,11 +54,13 @@ An embedded system developed for Raspberry Pi, integrating temperature/humidity 
 
 ### 4. Voice Interaction System  
 - **Speech Recognition**:  
-  - Wake word "computer" activates the system, supporting English/Chinese commands.  
-  - Recognizes queries like "What's the humidity?" or "Exit system", with <1.5s response time (tested on Raspberry Pi 4B).  
+  - The system is activated by the wake - word "computer" and supports both English and Chinese voice commands.
+  - It can accurately recognize queries such as "What's the humidity?" or "Exit system". During tests on the Raspberry Pi 3B, the response time was under 1.5 seconds, ensuring a quick and efficient interaction experience.
 - **Speech Synthesis**:  
-  - pyttsx3 engine for voice feedback, adjustable speech rate (150 words/minute) and volume.  
-  - Auto-broadcasts anomalies (e.g., "Warning: Humidity below 20%, please increase humidity!").  
+  - Leveraging the `webkitSpeechRecognition` and `SpeechSynthesisUtterance` web APIs for voice feedback, offering a smooth and browser - compatible solution.
+  - The speech rate can be adjusted according to user preferences, with a default setting of 150 words per minute. The volume can also be easily tweaked.
+  - In case of environmental anomalies, the system will automatically broadcast warnings. For example, if the humidity drops below 20%, it will announce "Warning: Humidity below 20%, please increase humidity!"
+
 
 ## 3. Technical Architecture & Implementation  
 
@@ -162,6 +166,7 @@ Project Root
 ### 1. Code Standards
 - **C++**: Follow C++11, camelCase naming (e.g., `drawText`), Doxygen comments for key functions.
 - **Python**: Adhere to PEP8, module-level comments, avoid global variables.
+- **JavaScript**: Adhere to common JavaScript style guides, use meaningful variable and function names, and add comments to explain complex logic, especially in the voice - related code using `webkitSpeechRecognition` and `SpeechSynthesisUtterance`.  
 
 ### 2. Contribution Workflow
 1. Fork the repo and create a feature branch (e.g., `feature/add-bme280`).
@@ -178,7 +183,6 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ### Acknowledgments
 Thanks to the following open-source projects and communities:
-- [pyttsx3](https://pyttsx3.readthedocs.io): Text-to-speech library
 - [Flask](https://palletsprojects.com/p/flask/): Web development framework
 - [Raspberry Pi Foundation](https://www.raspberrypi.org/): Hardware documentation and community resources
 
