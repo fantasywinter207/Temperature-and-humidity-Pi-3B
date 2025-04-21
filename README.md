@@ -1,7 +1,5 @@
 # Real-Time Environmental Monitoring System for Raspberry Pi
 
-![Project Image](path/to/your/project/image.png)
-
 **Revolutionize your environmental monitoring with our cutting - edge Raspberry Pi system!**
 
 This embedded system, designed specifically for Raspberry Pi, integrates real - time temperature and humidity monitoring, OLED data display, data storage, and voice interaction. Ideal for smart homes, greenhouses, and small - scale industrial monitoring.
@@ -69,7 +67,7 @@ An embedded system developed for Raspberry Pi, integrating temperature/humidity 
 | Sensor          | DHT11               | Temp/humidity collection| GPIO4 (BCM)      |  
 | Display         | 128x32 OLED         | Data visualization     | I2C (GPIO2/SDA, GPIO3/SCL) |  
 
-![Hardware Connection Diagram](images/7.png)
+![Hardware Connection Diagram](images/7.jpg)
 
 ### 2. Software Architecture  
 ```  
