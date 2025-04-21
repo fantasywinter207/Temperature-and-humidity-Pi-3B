@@ -39,7 +39,7 @@ An embedded system developed for Raspberry Pi, integrating temperature/humidity 
   - **Humidity**: 0.1% precision, format: "HUMIDITY: X.X%" (page 4).  
 - **Refresh Mechanism**: Auto-clears and redraws data every 60 seconds for clarity.
 
-![OLED Display Screenshot](images/1.jpg)
+![OLED Display Screenshot](https://github.com/fantasywinter207/Temperature-and-humidity-Pi-3B/blob/main/images/1.jpg)
 
 ### 3. Data Storage & Web API  
 - **Local Storage**:  
