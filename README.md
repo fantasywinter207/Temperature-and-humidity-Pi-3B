@@ -1,19 +1,24 @@
+# Real-Time Environmental Monitoring System for Raspberry Pi
 
-# Real-Time Environmental Monitoring System for Raspberry Pi  
+![Project Image](path/to/your/project/image.png)
 
+**Revolutionize your environmental monitoring with our cutting - edge Raspberry Pi system!**
 
-## 1. Project Overview  
-### Project Name  
-Real-Time Environmental Monitoring System for Raspberry Pi  
+This embedded system, designed specifically for Raspberry Pi, integrates real - time temperature and humidity monitoring, OLED data display, data storage, and voice interaction. Ideal for smart homes, greenhouses, and small - scale industrial monitoring.
 
-### Project Description  
-An embedded system developed for Raspberry Pi, integrating temperature/humidity monitoring, OLED data display, data storage, and voice interaction. Suitable for smart homes, greenhouses, and small-scale industrial monitoring. Uses C++ for hardware drivers and Python for web services and voice functions, balancing performance and development efficiency.  
+[Click here to watch our project in action!](https://www.example.com/video)
 
-### Core Advantages  
-- **Realtime Performance**: Thread prioritization and multi-threading ensure non-blocking sensor data collection and interface refresh.  
-- **Modular Design**: Separation of hardware drivers (DHT11, OLED) and software services (Web, Voice) for easy expansion and maintenance.  
-- **User Interaction**: Supports voice queries and anomaly alerts, reducing operational complexity.  
+## 1. Project Overview
+### Project Name
+Real-Time Environmental Monitoring System for Raspberry Pi
 
+### Project Description
+An embedded system developed for Raspberry Pi, integrating temperature/humidity monitoring, OLED data display, data storage, and voice interaction. Suitable for smart homes, greenhouses, and small - scale industrial monitoring. Uses C++ for hardware drivers and Python for web services and voice functions, balancing performance and development efficiency.
+
+### Core Advantages
+- **Realtime Performance**: Thread prioritization and multi - threading ensure non - blocking sensor data collection and interface refresh.
+- **Modular Design**: Separation of hardware drivers (DHT11, OLED) and software services (Web, Voice) for easy expansion and maintenance.
+- **User Interaction**: Supports voice queries and anomaly alerts, reducing operational complexity.
 
 ## 2. Key Functional Features  
 
@@ -32,7 +37,9 @@ An embedded system developed for Raspberry Pi, integrating temperature/humidity 
   - **Time**: Real-time date (YYYY-MM-DD) on page 0.  
   - **Temperature**: 0.1°C precision, format: "TEMPERATURE: X.X°C" (page 2).  
   - **Humidity**: 0.1% precision, format: "HUMIDITY: X.X%" (page 4).  
-- **Refresh Mechanism**: Auto-clears and redraws data every 60 seconds for clarity.  
+- **Refresh Mechanism**: Auto-clears and redraws data every 60 seconds for clarity.
+
+![OLED Display Screenshot](https://github.com/fantasywinter207/Temperature-and-humidity-Pi-3B/blob/main/images/1.jpg)
 
 ### 3. Data Storage & Web API  
 - **Local Storage**:  
@@ -41,16 +48,17 @@ An embedded system developed for Raspberry Pi, integrating temperature/humidity 
 - **Web Services**:  
   - Flask-based RESTful API:  
     - **POST /data**: Upload real-time data (Content-Type: application/json).  
-    - **GET /data**: Retrieve historical data for frontend display or analysis.  
+    - **GET /data**: Retrieve historical data for frontend display or analysis.
+
+![Web Interface Screenshot](images/2.jpg)
 
 ### 4. Voice Interaction System  
 - **Speech Recognition**:  
-  - Wake word "computer" activates the Vosk model, supporting English/Chinese commands (language packs required).  
+  - Wake word "computer" activates the system, supporting English/Chinese commands.  
   - Recognizes queries like "What's the humidity?" or "Exit system", with <1.5s response time (tested on Raspberry Pi 4B).  
 - **Speech Synthesis**:  
   - pyttsx3 engine for voice feedback, adjustable speech rate (150 words/minute) and volume.  
   - Auto-broadcasts anomalies (e.g., "Warning: Humidity below 20%, please increase humidity!").  
-
 
 ## 3. Technical Architecture & Implementation  
 
@@ -60,8 +68,8 @@ An embedded system developed for Raspberry Pi, integrating temperature/humidity 
 | Main Board      | Raspberry Pi 4B (4GB)| System control         | N/A              |  
 | Sensor          | DHT11               | Temp/humidity collection| GPIO4 (BCM)      |  
 | Display         | 128x32 OLED         | Data visualization     | I2C (GPIO2/SDA, GPIO3/SCL) |  
-![Uploading 微信图片_20250421202437.jpg…]()
 
+![Hardware Connection Diagram](diagrams/hardware_connection.png)
 
 ### 2. Software Architecture  
 ```  
@@ -71,7 +79,7 @@ Raspberry Pi OS (Raspbian)
 │  └─ OLED Class (oled.h/cpp): I2C protocol and text rendering  
 ├─ Python Service Layer  
 │  ├─ Flask Web Server (server.py): Data storage and API  
-│  └─ Voice Assistant (speak.py): Speech recognition, synthesis, and alerts  
+│  └─ Voice Assistant (removed): No longer part of the codebase  
 └─ Main Program (main.cpp): Multi-thread integration of drivers and services  
 ```  
 
@@ -84,7 +92,6 @@ Raspberry Pi OS (Raspbian)
 - **Cross-Language Collaboration**:  
   - C++ for high-performance hardware drivers, Python for I/O-bound tasks (network requests, speech synthesis), balancing efficiency and development speed.  
 
-
 ## 4. Quick Start & Usage Guide  
 
 ### 1. Hardware Wiring  
@@ -94,7 +101,10 @@ Raspberry Pi OS (Raspbian)
 | DATA      | 7                         | GPIO4           |  
 | GND       | 6                         | -               |  
 
-The OLED display connects via I2C; enable I2C in `raspi-config` before use.  
+The OLED display connects via I2C; enable I2C in `raspi-config` before use.
+
+![DHT11 Wiring Diagram](diagrams/dht11_wiring.png)
+![OLED Wiring Diagram](diagrams/oled_wiring.png)
 
 ### 2. Software Installation  
 #### Step 1: Clone Repository  
@@ -103,91 +113,85 @@ git clone https://github.com/fantasywinter207/Temperature-and-humidity-Pi-3B.git
 cd Temperature-and-humidity-Pi-3B 
 ```  
 
-### 2. System Startup Commands  
-```bash  
-bash ./run.sh 
-```  
+### 3. System Startup Commands  
+```bash
+bash ./run.sh
+```
 
-### 4. Voice Command List  
-| Command Type   | Example Command         | System Response                     |  
-|----------------|-------------------------|-------------------------------------|  
-| Wake Command   | "computer"              | "How can I help you?"               |  
-| Temp/Humid Query| "Humitidy" or "temperature"| "Current temperature is 25.5°C"     |  
-| Time Query     | "time"      | "The current time is 14:30"         |  
-| Exit Command   | "exit" or "quit"                 | "Goodbye!" (stops all services)     |  
+### 4. Voice Command List
+| Command Type   | Example Command         | System Response                     |
+|----------------|-------------------------|-------------------------------------|
+| Wake Command   | "computer"              | "How can I help you?"               |
+| Temp/Humid Query| "Humidity" or "temperature"| "Current temperature is 25.5°C"     |
+| Time Query     | "time"      | "The current time is 14:30"         |
+| Exit Command   | "exit" or "quit"                 | "Goodbye!" (stops all services)     |
 
+## 5. Code Structure & Module Description
+### 1. Directory Structure
+```
+Project Root
+├── dht11.h         # DHT11 Class Declaration
+├── dht11.cpp       # DHT11 Driver Implementation
+├── oled.h          # OLED Class Declaration
+├── oled.cpp        # OLED Driver Implementation
+├── main.cpp        # Main Program Logic
+├── server.py       # Web Server
+├── sensor_data.json    # Data Storage File
+├── requirements.txt    # Python Dependencies
+├── templates/      # HTML templates
+│   └── index.html  # Front - end page
+├── run.sh          # Script to compile and run the program
+├── .github/        # GitHub Actions configuration
+│   └── workflows/
+│       └── c - cpp.yml # C/C++ CI configuration
+└── LICENSE         # License File
+```
 
-## 5. Code Structure & Module Description  
+### 2. Core Class Descriptions
+#### DHT11 Class (dht11.h/cpp)
+- **Function**: Encapsulates DHT11 communication and data validation.
+- **Key Methods**:
+  - `readData()`: Returns `std::pair<float, float>` (humidity, temperature), or `std::nullopt` on validation failure.
+  - `pi_mmio_init()`: Initializes GPIO memory mapping for high-speed hardware access.
 
-### 1. Directory Structure  
-```  
-Project Root  
-├── src/                # C++ Source Code  
-│   ├── dht11.h         # DHT11 Class Declaration  
-│   ├── dht11.cpp       # DHT11 Driver Implementation  
-│   ├── oled.h          # OLED Class Declaration  
-│   ├── oled.cpp        # OLED Driver Implementation  
-│   └── main.cpp        # Main Program Logic  
-├── scripts/            # Python Scripts  
-│   ├── server.py       # Web Server  
-│   └── speak.py        # Voice Assistant  
-├── sensor_data.json    # Data Storage File  
-├── requirements.txt    # Python Dependencies  
-└── LICENSE             # License File  
-```  
+#### OLED Class (oled.h/cpp)
+- **Function**: Controls OLED display, supporting text rendering and initialization.
+- **Key Methods**:
+  - `drawText(int page, int col, std::string)`: Draws text at specified page (0 - 4) and column (0 - 127).
+  - `init()`: Configures OLED parameters (contrast, scan direction, etc.).
 
-### 2. Core Class Descriptions  
-#### DHT11 Class (dht11.h/cpp)  
-- **Function**: Encapsulates DHT11 communication and data validation.  
-- **Key Methods**:  
-  - `readData()`: Returns `std::pair<float, float>` (humidity, temperature), or `std::nullopt` on validation failure.  
-  - `pi_mmio_init()`: Initializes GPIO memory mapping for high-speed hardware access.  
+## 6. Contribution & Collaboration
+### 1. Code Standards
+- **C++**: Follow C++11, camelCase naming (e.g., `drawText`), Doxygen comments for key functions.
+- **Python**: Adhere to PEP8, module-level comments, avoid global variables.
 
-#### OLED Class (oled.h/cpp)  
-- **Function**: Controls OLED display, supporting text rendering and initialization.  
-- **Key Methods**:  
-  - `drawText(int page, int col, std::string)`: Draws text at specified page (0-4) and column (0-127).  
-  - `init()`: Configures OLED parameters (contrast, scan direction, etc.).  
+### 2. Contribution Workflow
+1. Fork the repo and create a feature branch (e.g., `feature/add-bme280`).
+2. Run unit tests (to be added) before code submission.
+3. Submit Pull Requests with feature descriptions and test steps.
 
+### 3. Issue Reporting
+- **Bug Reports**: Include reproduction steps, hardware model, and error logs (e.g., "dht11.cpp line XX validation failed").
+- **Feature Requests**: Submit via GitHub Issues with "Enhancement" label.
 
-## 6. Contribution & Collaboration  
+## 7. License & Acknowledgments
+### License
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
-### 1. Code Standards  
-- **C++**: Follow C++11, camelCase naming (e.g., `drawText`), Doxygen comments for key functions.  
-- **Python**: Adhere to PEP8, module-level comments, avoid global variables.  
+### Acknowledgments
+Thanks to the following open-source projects and communities:
+- [pyttsx3](https://pyttsx3.readthedocs.io): Text-to-speech library
+- [Flask](https://palletsprojects.com/p/flask/): Web development framework
+- [Raspberry Pi Foundation](https://www.raspberrypi.org/): Hardware documentation and community resources
 
-### 2. Contribution Workflow  
-1. Fork the repo and create a feature branch (e.g., `feature/add-bme280`).  
-2. Run unit tests (to be added) before code submission.  
-3. Submit Pull Requests with feature descriptions and test steps.  
+## 8. Future Plans
+### Maintenance
+- Regular dependency updates and security patches (monthly).
+- Bug fixes for community feedback within 72 hours.
 
-### 3. Issue Reporting  
-- **Bug Reports**: Include reproduction steps, hardware model, and error logs (e.g., "dht11.cpp line XX validation failed").  
-- **Feature Requests**: Submit via GitHub Issues with "Enhancement" label.  
-
-
-## 7. License & Acknowledgments  
-
-### License  
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.  
-
-### Acknowledgments  
-Thanks to the following open-source projects and communities:  
-- [Vosk](https://alphacephei.com/vosk): Speech recognition engine  
-- [pyttsx3](https://pyttsx3.readthedocs.io): Text-to-speech library  
-- [Flask](https://palletsprojects.com/p/flask/): Web development framework  
-- [Raspberry Pi Foundation](https://www.raspberrypi.org/): Hardware documentation and community resources  
-
-
-## 8. Future Plans  
-
-### Roadmap  
-| Version | Timeline | Core Features                          |  
-|---------|----------|----------------------------------------|  
-| v1.1    | Q1 2025  | Support for BME280 sensor (pressure/altitude) |  
-| v1.2    | Q2 2025  | Migrate from JSON to SQLite database    |  
-| v1.3    | Q3 2025  | Develop mobile apps (Android/iOS)      |  
-
-### Maintenance  
-- Regular dependency updates and security patches (monthly).  
-- Bug fixes for community feedback within 72 hours.  
+### Roadmap
+| Version | Timeline | Core Features                          |
+|---------|----------|----------------------------------------|
+| v1.1    | Q1 2025  | Support for BME280 sensor (pressure/altitude) |
+| v1.2    | Q2 2025  | Migrate from JSON to SQLite database    |
+| v1.3    | Q3 2025  | Develop mobile apps (Android/iOS)      |
