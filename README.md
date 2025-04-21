@@ -177,7 +177,6 @@ Project Root
 - **Bug Reports**: Include reproduction steps, hardware model, and error logs (e.g., "dht11.cpp line XX validation failed").
 - **Feature Requests**: Submit via GitHub Issues with "Enhancement" label. 
 
-下面是以表格形式呈现的分工内容，你可以将其添加到 README 文件或者专门的项目文档中。
 
 ### 7. Team Division of Labor
 
