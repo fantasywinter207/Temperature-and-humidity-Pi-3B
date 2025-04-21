@@ -175,7 +175,7 @@ Project Root
 
 ### 3. Issue Reporting
 - **Bug Reports**: Include reproduction steps, hardware model, and error logs (e.g., "dht11.cpp line XX validation failed").
-- **Feature Requests**: Submit via GitHub Issues with "Enhancement" label.
+- **Feature Requests**: Submit via GitHub Issues with "Enhancement" label. 
 
 下面是以表格形式呈现的分工内容，你可以将其添加到 README 文件或者专门的项目文档中。
 
@@ -184,7 +184,7 @@ Project Root
 | Team Member | Student ID | Responsibilities |
 | --- | --- | --- |
 | Yuhang Nan | 2962263N | - `dht11.cpp` and `dht11.h`: Implement the data acquisition function of the DHT11 temperature and humidity sensor, including writing the code for sensor initialization, data reading, and verification logic to ensure accurate and stable data acquisition. <br> - `main.cpp`: Integrate the functions of each module, build the overall operation framework of the project, coordinate the interaction between hardware drivers and software functions, and handle program flow control and exception situations. |
-| Yuanzhuang | 2951084Z | - `oled.cpp` and `oled.h`: Write the driver code for the OLED display screen, implement functions such as screen initialization and content drawing (e.g., temperature and humidity data, system status), and optimize the display effect and refresh speed. |
+| Yuan Zhuang | 2951084Z | - `oled.cpp` and `oled.h`: Write the driver code for the OLED display screen, implement functions such as screen initialization and content drawing (e.g., temperature and humidity data, system status), and optimize the display effect and refresh speed. |
 | Jianxiang Fan | 2962248F | - Originally responsible for `server.py`: Build a web server, handle HTTP requests and responses, provide data interfaces for the front - end page, and ensure the stability and security of data transmission. <br> - Now responsible for voice - related JavaScript scripts: Implement voice recognition and synthesis functions based on `webkitSpeechRecognition` and `SpeechSynthesisUtterance`, including wake - word detection, voice command parsing, and voice feedback generation logic development. |
 | Chu Ci Wang | 2932412W | - `sensor_data.json`: Design the data storage structure, implement the persistent storage and reading operations of sensor data (such as temperature and humidity), and ensure the reliability and efficiency of data storage. <br> - `readme`: Write the project README document, accurately describe the project's functions, architecture, usage methods, division of labor, etc., to facilitate others to understand and use the project. |
 | Lianzheng Xu | 2962333X | - write the `run.sh` script to implement functions such as quick project startup, environment configuration check, and dependency installation, improving the convenience of project deployment and operation. | 
