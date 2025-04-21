@@ -310,6 +310,21 @@
                         });
                 } else {
                     handleCommand();
+                    const min_temperature_value = 10
+                    const max_temperature_value = 40
+                    const min_humidity_value = 20
+                    const max_humidity_value = 95
+                    const monitoring_threshold_running = True
+                    const temperature = document.getElementById('current-temperature').textContent;
+                    const humidity = document.getElementById('current-humidity').textContent;
+                    if (temperature <= min_temperature_value)
+                        speakText("Warning: The current temperature is low, please keep warm! Current temperature is {temp}°C")
+                    if (humidity <= min_humidity_value)
+                        speakText("Warning: The current humidity is low, please pay attention to moisturizing! Current humidity is {humi}%")
+                    if (temperature >= max_temperature_value)
+                        speakText("Warning: The current temperature is high, please keep cool! Current temperature is {temp}°C")
+                    if (humidity >= max_humidity_value)
+                        speakText("Warning: The current humidity is high, please pay attention to ventilation! Current humidity is {humi}%")
                 }
             };
 
