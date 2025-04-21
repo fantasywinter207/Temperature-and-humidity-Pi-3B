@@ -60,6 +60,8 @@ An embedded system developed for Raspberry Pi, integrating temperature/humidity 
 | Main Board      | Raspberry Pi 4B (4GB)| System control         | N/A              |  
 | Sensor          | DHT11               | Temp/humidity collection| GPIO4 (BCM)      |  
 | Display         | 128x32 OLED         | Data visualization     | I2C (GPIO2/SDA, GPIO3/SCL) |  
+![Uploading 微信图片_20250421202437.jpg…]()
+
 
 ### 2. Software Architecture  
 ```  
